@@ -17,9 +17,14 @@
 # include <stdio.h>
 # include <unistd.h>
 
-int		format(const char format, va_list args);
+int	ft_printf(const char *string, ...);
+int		formats(const char format, va_list ap);
+int		ft_putptr(void *ptr);
+ssize_t	ft_putnum_hexa(unsigned long long num, char alpha);
 int		ft_putchar(char c);
 size_t	ft_strlen(const char *str);
 int		ft_putstr(char *string);
+int	ft_putnum(long number);
+int	ft_putnum_unsigned(unsigned int number);
 
 #endif

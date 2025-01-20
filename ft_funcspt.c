@@ -28,4 +28,26 @@ int	ft_putptr(void *ptr)
 	return (len);
 }
 
+ssize_t	ft_putnum_hexa(unsigned long long num, char alpha)
+{
+	ssize_t	len;
+	ssize_t temp_len;
+	char *base;
 
+	len = 0;
+	if(alpha == 'x')
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	if (num > 15)
+	{
+		temp_len = ft_putnum_hexa((n / 16), alpha);
+		if (temp_len == -1)
+			return (-1);
+		len += temp_len;
+	}
+	if (ft_putchar(base[n % 16]) == -1)
+		return (-1);
+	len++;
+	return (len);
+}
