@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	formats(const char format, va_list ap)
 {
@@ -58,4 +58,13 @@ int	ft_printf(const char *string, ...)
 	}
 	va_end(ap);
 	return (len);
+}
+
+
+int main (void)
+{
+	char string[] = "hey babe";
+
+	ft_printf("my function -> %X\n", string);
+	printf("the og function -> %X\n", string);
 }
