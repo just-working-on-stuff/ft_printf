@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_funcs.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghsaad <ghsaad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 19:12:30 by ghsaad            #+#    #+#             */
+/*   Updated: 2025/01/20 19:21:14 by ghsaad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int	ft_putchar (char c)
+int	ft_putchar(char c)
 {
 	return (write(1, &c, 1));
 }
@@ -17,75 +29,61 @@ size_t	ft_strlen(const char *str)
 
 int	ft_putstr(char *string)
 {
-	int len;
+	int	len;
 
-    if (!string)
-    {
-        string = "(null)";
-    }
-    len = ft_strlen(string);
-    if (write(1, string, len) == -1)
-    {
-        return -1; // Error in writing
-    }
-    return len; // Return length of the printed string
+	if (!string)
+	{
+		string = "(null)";
+	}
+	len = ft_strlen(string);
+	if (write(1, string, len) == -1)
+	{
+		return (-1);
+	}
+	return (len);
 }
 
-int ft_putnum(long number)
+int	ft_putnum(long number)
 {
-    int len;
-    int temp_len;
+	int	len;
+	int	temp_len;
 
-    len = 0;
+	len = 0;
 	if (number < 0)
 	{
 		if (ft_putchar('-') == -1)
-            return (-1);
-        len++
+			return (-1);
+		len++;
 		number = -number;
 	}
 	if (number > 9)
 	{
 		temp_len = ft_putnum(number / 10);
-        if (temp_len == -1)
-            return (-1);
-        len += temp_len;
+		if (temp_len == -1)
+			return (-1);
+		len += temp_len;
 	}
 	if (ft_putchar((number % 10) + '0') == -1)
-        return (-1);
-    len++;
-    return (len);   
+		return (-1);
+	len++;
+	return (len);
 }
-int ft_putnum_unsigned(unsigned int number)
-{
-    int len;
-    int temp_len;
 
-    len = 0;
-    if (number > 9)
+int	ft_putnum_unsigned(unsigned int number)
+{
+	int	len;
+	int	temp_len;
+
+	len = 0;
+	if (number > 9)
 	{
 		temp_len = ft_putnum_unsigned(number / 10);
-        if (temp_len == -1)
-            return (-1);
-        len += temp_len;
+		if (temp_len == -1)
+			return (-1);
+		len += temp_len;
 	}
 	if (ft_putchar((number % 10) + '0') == -1)
-        return (-1);
-    len++;
-    return (len);   
-}
-int ft_putptr(void *ptr)
-{
-    int len;
-    int temp_len;
-
-    len = 0;
-    if (ft_putstr("0x") == -1)
-        return (-1);
-    len += 2;
-    temp_len = ft_putnum_hexa((unsigned long)ptr, 'x');
-    if (temp_len == -1)
-        return (-1);
-    len += temp_len;
-    return (len);
+		return (-1);
+	len++;
+	return (len);
 }

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_funcspt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghsaad <ghsaad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 19:12:37 by ghsaad            #+#    #+#             */
-/*   Updated: 2025/01/20 19:13:21 by ghsaad           ###   ########.fr       */
+/*   Created: 2025/01/20 19:20:39 by ghsaad            #+#    #+#             */
+/*   Updated: 2025/01/20 19:21:50 by ghsaad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
+int	ft_putptr(void *ptr)
+{
+	int	len;
+	int	temp_len;
 
-int		format(const char format, va_list args);
-int		ft_putchar(char c);
-size_t	ft_strlen(const char *str);
-int		ft_putstr(char *string);
+	len = 0;
+	if (ft_putstr("0x") == -1)
+		return (-1);
+	len += 2;
+	temp_len = ft_putnum_hexa((unsigned long)ptr, 'x');
+	if (temp_len == -1)
+		return (-1);
+	len += temp_len;
+	return (len);
+}
 
-#endif
+

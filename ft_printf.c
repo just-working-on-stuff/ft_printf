@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghsaad <ghsaad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 19:12:33 by ghsaad            #+#    #+#             */
+/*   Updated: 2025/01/20 19:17:23 by ghsaad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
 int	formats(const char format, va_list ap)
@@ -14,36 +26,36 @@ int	formats(const char format, va_list ap)
 		return (ft_putnum_hexa(va_arg(ap, unsigned int), format));
 	else if (format == 'p')
 		return (ft_putptr(va_arg(ap, void *)));
-	else if (format == %)
+	else if (format == '%')
 		return (ft_putchar('%'));
 	return (-1);
 }
 
 int	ft_printf(const char *string, ...)
 {
-	va_list ap;
-	int len;
-	int temp_len;
+	va_list	ap;
+	int		len;
+	int		temp_len;
 
 	len = 0;
-	va_start(ap, str);
-     while(*string)
-     {
-          if (*str == '%')
-          {
-               temp_len = formats(*++str, ap);
-               if (temp_len == -1)
-                    return (-1);
-               len += temp_len;
-          }
-          else
-          {
-               if (ft_putchar(*string) == -1)
-                    return (-1);
-               len++;
-          }
-          string++;
-     }
-     va_end(ap);
-     return (len);
+	va_start(ap, string);
+	while (*string)
+	{
+		if (*string == '%')
+		{
+			temp_len = formats(*++string, ap);
+			if (temp_len == -1)
+				return (-1);
+			len += temp_len;
+		}
+		else
+		{
+			if (ft_putchar(*string) == -1)
+				return (-1);
+			len++;
+		}
+		string++;
+	}
+	va_end(ap);
+	return (len);
 }
