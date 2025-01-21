@@ -63,8 +63,8 @@ int	ft_printf(const char *string, ...)
 
 int main (void)
 {
-	char string[] = "hey babe";
+	// char string[] = "hehe";
 
-	ft_printf("my function -> %X\n", string);
-	printf("the og function -> %X\n", string);
+	ft_printf("    my function -> %s\n");
+	printf("the og function -> %s\n");
 }
